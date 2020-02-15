@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<configuration>
+  <license-key>9vvaaDl0N9c60CjXMRDcfUGCrAsCV2Dg3J7FZa9XWJSDS5eF9dAx2rNxrSWIDcLY</license-key>
+  <copyright>©VSquare Consulting Engineers</copyright>
+  <publisher>VSquareCE</publisher>
+  <developer>Srinivasa Rao Masanam</developer>
+  <username>Srinivasa Rao Masanam</username>
+  <isections>xISections</isections>
+  <csections>xCSections</csections>
+  <lsections>xLSections</lsections>
+  <tubesections>xTubeSections</tubesections>
+  <pipesections>xPipeSections</pipesections>
+  <materials>xMaterials</materials>
+  <bolts>xBolts</bolts>
+  <db-directory>C:\Program Files (x86)\SES\resources\databases</db-directory>
+  <file-extension>.etcx</file-extension>
+  <ses-fname>xtractordata</ses-fname>
+  <ses-ext>.xmlx</ses-ext>
+  <status>
+  </status>
+</configuration>

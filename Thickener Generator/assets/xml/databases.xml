@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<databases>
+<copyright>©Elevated Terrains Consulting Engineers</copyright>
+	<!-- The final tree view should be by combining all shapes in to one group -->
+	<!-- For example, the Indian database should show I shapes, C shapes etc., -->
+	<database name="Indian">
+		<!-- Databases and table names of I/H shape sections -->
+		<shape name="I">
+			<section-type name="JB Sections" db-table-name = "IN-JB"/>
+			<section-type name="LB Sections" db-table-name = "IN-LB"/>
+			<section-type name="MB Sections" db-table-name = "IN-MB"/>
+			<section-type name="HB Sections" db-table-name = "IN-HB"/>
+			<section-type name="WB Sections" db-table-name = "IN-WB"/>
+			<section-type name="SC Sections" db-table-name = "IN-SC"/>
+			<section-type name="NPB Sections" db-table-name = "IN-NPB"/>
+			<section-type name="WPB Sections" db-table-name = "IN-WPB"/>
+			<section-type name="PBP Sections" db-table-name = "IN-PBP"/>        
+		</shape>
+		<!-- Databases and table names of Channel sections -->
+		<shape name="C">
+			<section-type name="JC Sections" db-table-name = "IN-JC"/>
+			<section-type name="LC Sections" db-table-name = "IN-LC"/>
+			<section-type name="MC Sections" db-table-name = "IN-MC"/>        
+		</shape>
+	</database>
+	<database name="US Metric">
+		<!-- Databases and table names of I/H shape sections -->    
+		<shape name="I">
+			<section-type name="W Sections" db-table-name = "US-MU-W"/>
+			<section-type name="HP Sections" db-table-name = "US-MU-HP"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->
+		<shape name="C">
+			<section-type name="C Sections" db-table-name = "US-MU-C"/>
+			<section-type name="MC Sections" db-table-name = "US-MU-MC"/>
+		</shape>
+	</database>            
+	<database name="US Customary">
+		<!-- Databases and table names of I/H shape sections -->        
+		<shape name="I">
+			<section-type name="W Sections" db-table-name = "US-CU-W"/>
+			<section-type name="M Sections" db-table-name = "US-CU-M"/>
+			<section-type name="S Sections" db-table-name = "US-CU-S"/>
+			<section-type name="HP Sections" db-table-name = "US-CU-HP"/>	
+		</shape>
+		<!-- Databases and table names of Channel sections -->
+		<shape name="C">
+			<section-type name="C Sections" db-table-name = "US-CU-C"/>
+			<section-type name="MC Sections" db-table-name = "US-CU-MC"/>        	
+		</shape>
+	</database>                
+	<database name="Australian">
+		<!-- Databases and table names of I/H shape sections -->            
+		<shape name="I">
+			<section-type name="UB Sections" db-table-name = "AU-UB"/>
+			<section-type name="UC Sections" db-table-name = "AU-UC"/>
+			<section-type name="WB Sections" db-table-name = "AU-WB"/>
+			<section-type name="WC Sections" db-table-name = "AU-WC"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->
+		<shape name="C">
+			<section-type name="PFC Sections" db-table-name = "AU-PFC"/>
+			<section-type name="TFC Sections" db-table-name = "AU-TFC"/>
+		</shape>
+	</database>    
+	<database name="British">
+		<!-- Databases and table names of I/H shape sections -->                
+		<shape name="I">
+			<section-type name="UB Sections" db-table-name = "UK-UB"/>
+			<section-type name="UC Sections" db-table-name = "UK-UC"/>
+			<section-type name="UBP Sections" db-table-name = "UK-UBP"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->
+		<shape name="C">
+			<section-type name="PFC Sections" db-table-name = "UK-PFC"/>
+			<section-type name="TFC Sections" db-table-name = "UK-TFC"/>        
+		</shape>
+	</database>        
+	<database name="Chilean">
+		<!-- Databases and table names of I/H shape sections -->                    
+		<shape name="I">
+			<section-type name="IN Sections" db-table-name = "CL-IN"/>
+			<section-type name="HN Sections" db-table-name = "CL-HN"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+		<shape name="C">
+			<section-type name="C Sections" db-table-name = "CL-C"/>
+		</shape>
+	</database>                    
+	<database name="Chinese">
+		<!-- Databases and table names of I/H shape sections -->                    
+		<shape name="I">
+			<section-type name="I Sections" db-table-name = "GB-IN"/>
+			<section-type name="HN Sections" db-table-name = "GB-HN"/>
+			<section-type name="HM Sections" db-table-name = "GB-HM"/>
+			<section-type name="HW Sections" db-table-name = "GB-HW"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+		<shape name="C">
+			<section-type name="C Sections" db-table-name = "GB-C"/>
+		</shape>
+	</database>              
+	<database name="European">
+		<!-- Databases and table names of I/H shape sections -->                
+		<shape name="I">
+			<section-type name="IPE Sections" db-table-name = "EU-IPE"/>
+			<section-type name="IPN Sections" db-table-name = "EU-IPN"/>
+			<section-type name="HE Sections" db-table-name = "GB-HE"/>
+			<section-type name="HL Sections" db-table-name = "GB-HL"/>
+			<section-type name="HD Sections" db-table-name = "GB-HD"/>
+			<section-type name="HP Sections" db-table-name = "GB-HP"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+		<shape name="C">
+			<section-type name="UPN Sections" db-table-name = "EU-UPN"/>
+			<section-type name="UPE Sections" db-table-name = "EU-UPE"/>        
+		</shape>
+	</database>              
+	<database name="Japanese">
+		<!-- Databases and table names of I/H shape sections -->                    
+		<shape name="I">
+			<section-type name="H Sections" db-table-name = "JP-H"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+		<shape name="C">
+			<section-type name="C Sections" db-table-name = "JP-C"/>
+		</shape>
+	</database>              
+	<database name="Mexican">
+		<!-- Databases and table names of I/H shape sections -->                    
+		<shape name="I">
+			<section-type name="IR Sections" db-table-name = "MX-IR"/>
+			<section-type name="IE Sections" db-table-name = "MX-IE"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+	</database>                  
+	<database name="Russian">
+		<!-- Databases and table names of I/H shape sections -->                    
+		<shape name="I">
+			<section-type name="I Sections" db-table-name = "RU-I"/>
+			<section-type name="C Sections" db-table-name = "RU-C"/>
+			<section-type name="M Sections" db-table-name = "RU-M"/>
+			<section-type name="Б Sections" db-table-name = "RU-Б"/>
+			<section-type name="Ш Sections" db-table-name = "RU-Ш"/>
+			<section-type name="K Sections" db-table-name = "RU-K"/>
+			<section-type name="ДБ Sections" db-table-name = "RU-ДБ"/>
+			<section-type name="ДШ Sections" db-table-name = "RU-ДШ"/>
+		</shape>
+		<!-- Databases and table names of Channel sections -->        
+		<shape name="C">
+			<section-type name="У Sections" db-table-name = "RU-У"/>
+			<section-type name="П Sections" db-table-name = "RU-П"/>
+			<section-type name="Э Sections" db-table-name = "RU-Э"/>
+			<section-type name="С Sections" db-table-name = "RU-С"/>
+			<section-type name="Л Sections" db-table-name = "RU-Л"/>                        
+		</shape>
+	</database>
+</databases>
