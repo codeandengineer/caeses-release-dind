@@ -860,7 +860,7 @@ GetFileName:
       Dim ColumnsSupport As SupportCondition, sMyMz As MemRelease, eMyMz As MemRelease
       Dim ColumnsSupportNum As Long, sRelMyMz As Long, eRelMyMz As Long
 
-      'Dim OffSpecStart As Integer, OffSpecEnd As Integer, CBStep As Integer, RBStep As Integer
+        Dim OffSpecStart As Integer, OffSpecEnd As Integer, CBStep As Integer, RBStep As Integer
 
       With ColumnsSupport
          If radFixed.Checked Then
@@ -931,260 +931,260 @@ GetFileName:
          End If
          Call TG.GenerateBeams(SSI(intPCD).NodesPCD, SSI(intPCD).BeamIncPCD, SeqPlateNum)
          Dim nBeams As Long
-         'Dim sNodeCol As NodeCoOrds, eNodeCol As NodeCoOrds
+            Dim sNodeCol As NodeCoOrds, eNodeCol As NodeCoOrds
          nBeams = CLng((UBound(SSI(intPCD).BeamIncPCD) + 1) / GD.nRB)
          ReDim SSI(intPCD).ColumnIncPCD(CInt(GD.nRB - 1)) : ReDim SSI(intPCD).grpColumnPCD(CInt(GD.nRB - 1)) : ReDim SSI(intPCD).SupNodes(CInt(GD.nRB - 1))
-         'If intPCD < UBound(SSI) Then
-         '   For I = 0 To CInt(GD.nRB - 1)
-         '      With SSI(intPCD).BeamIncPCD(I)
-         '         eNodeCol = .sNode
-         '         SeqNodeNum = SeqNodeNum + 1
-         '         sNodeCol.No = SeqNodeNum : sNodeCol.x = eNodeCol.x : sNodeCol.y = GD.Origin.y + SSI(intPCD).EL : sNodeCol.z = eNodeCol.z
-         '         OSGeometry.CreateNode(SeqNodeNum, sNodeCol.x, sNodeCol.y, sNodeCol.z)
-         '         SeqPlateNum = SeqPlateNum + 1
-         '         With SSI(intPCD).ColumnIncPCD(I)
-         '            .No = SeqPlateNum
-         '            .sNode = sNodeCol
-         '            .eNode = eNodeCol
-         '            SSI(intPCD).grpColumnPCD(I) = CInt(.No)
-         '            SSI(intPCD).SupNodes(I) = CInt(.sNode.No)
-         '            'Columns are created below
-         '            OSGeometry.CreateBeam(.No, .sNode.No, .eNode.No)
-         '            OSProperty.AssignBetaAngle(.No, (-1 * Rad2Deg(GD.sDelta + I * GD.Omega)))
-         '            OSSupport.AssignSupportToNode(.sNode.No, ColumnsSupportNum)
-         '         End With
-         '      End With
-         '   Next I
-         'End If
+            If intPCD < UBound(SSI) Then
+                For I = 0 To CInt(GD.nRB - 1)
+                    With SSI(intPCD).BeamIncPCD(I)
+                        eNodeCol = .sNode
+                        SeqNodeNum = SeqNodeNum + 1
+                        sNodeCol.No = SeqNodeNum : sNodeCol.x = eNodeCol.x : sNodeCol.y = GD.Origin.y + SSI(intPCD).EL : sNodeCol.z = eNodeCol.z
+                        OSGeometry.CreateNode(SeqNodeNum, sNodeCol.x, sNodeCol.y, sNodeCol.z)
+                        SeqPlateNum = SeqPlateNum + 1
+                        With SSI(intPCD).ColumnIncPCD(I)
+                            .No = SeqPlateNum
+                            .sNode = sNodeCol
+                            .eNode = eNodeCol
+                            SSI(intPCD).grpColumnPCD(I) = CInt(.No)
+                            SSI(intPCD).SupNodes(I) = CInt(.sNode.No)
+                            'Columns are created below
+                            OSGeometry.CreateBeam(.No, .sNode.No, .eNode.No)
+                            OSProperty.AssignBetaAngle(.No, (-1 * Rad2Deg(GD.sDelta + I * GD.Omega)))
+                            OSSupport.AssignSupportToNode(.sNode.No, ColumnsSupportNum)
+                        End With
+                    End With
+                Next I
+            End If
          With SSI(intPCD)
             If intPCD = UBound(SSI) Then
                .Desc = "PCD" & (UBound(SSI) + 1)
             End If
             OSGeometry.CreateGroupEx(GroupType.Plates, "_FP_" & .Desc, UBound(.grpPCD) + 1, .grpPCD)
-            'ReDim .grpBeamPCD(UBound(.BeamIncPCD))
-            'For I = 0 To UBound(.BeamIncPCD)
-            '   .grpBeamPCD(I) = CInt(.BeamIncPCD(I).No)
-            'Next I
-            'If intPCD = 0 Then
-            '   CreateSTAADMemberProperty(RadBeam)
-            '   With RadBeam.OffSpec
-            '      .LocalOrGlobal = OffsetAxis.GlobalAxis
-            '      .StartOrEnd = OffsetEnd.sEnd
-            '      .x = 0.0 : .y = (-1) * (RadBeam.sData.h / 2 / 1000) / Math.Cos(Deg2Rad(Val(Me.txtAlpha.Text))) : .z = 0.0
-            '      OffSpecStart = CInt(OSProperty.CreateMemberOffsetSpec(.StartOrEnd, .LocalOrGlobal, .x, .y, .z))
-            '      .StartOrEnd = OffsetEnd.eEnd
-            '      OffSpecEnd = CInt(OSProperty.CreateMemberOffsetSpec(.StartOrEnd, .LocalOrGlobal, .x, .y, .z))
-            '   End With
-            '   With RadBeam.mData
-            '      .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
-            '   End With
-            'End If
-            'OSGeometry.CreateGroupEx(GroupType.Beams, "_RB_" & .Desc, UBound(.grpBeamPCD) + 1, .grpBeamPCD)
-            'OSProperty.AssignBeamProperty(.grpBeamPCD, RadBeam.ID)
+                ReDim .grpBeamPCD(UBound(.BeamIncPCD))
+                For I = 0 To UBound(.BeamIncPCD)
+                    .grpBeamPCD(I) = CInt(.BeamIncPCD(I).No)
+                Next I
+                If intPCD = 0 Then
+                    CreateSTAADMemberProperty(RadBeam)
+                    With RadBeam.OffSpec
+                        .LocalOrGlobal = OffsetAxis.GlobalAxis
+                        .StartOrEnd = OffsetEnd.sEnd
+                        .x = 0.0 : .y = (-1) * (RadBeam.sData.h / 2 / 1000) / Math.Cos(Deg2Rad(Val(Me.txtAlpha.Text))) : .z = 0.0
+                        OffSpecStart = CInt(OSProperty.CreateMemberOffsetSpec(.StartOrEnd, .LocalOrGlobal, .x, .y, .z))
+                        .StartOrEnd = OffsetEnd.eEnd
+                        OffSpecEnd = CInt(OSProperty.CreateMemberOffsetSpec(.StartOrEnd, .LocalOrGlobal, .x, .y, .z))
+                    End With
+                    With RadBeam.mData
+                        .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
+                    End With
+                End If
+                OSGeometry.CreateGroupEx(GroupType.Beams, "_RB_" & .Desc, UBound(.grpBeamPCD) + 1, .grpBeamPCD)
+                OSProperty.AssignBeamProperty(.grpBeamPCD, RadBeam.ID)
 
-            'AssignMaterialPropertyToBeams(.grpBeamPCD, RadBeam.mData.STAADName)
+                AssignMaterialPropertyToBeams(.grpBeamPCD, RadBeam.mData.STAADName)
 
-            'OSProperty.AssignMemberSpecToBeam(.grpBeamPCD, OffSpecStart)
-            'OSProperty.AssignMemberSpecToBeam(.grpBeamPCD, OffSpecEnd)
-            'If intPCD < UBound(SSI) Then
-            '   OSGeometry.CreateGroupEx(GroupType.Beams, "_COL_" & .Desc, UBound(.grpColumnPCD) + 1, .grpColumnPCD)
-            '   OSGeometry.CreateGroupEx(GroupType.Nodes, "_SUP_" & .Desc, UBound(.SupNodes) + 1, .SupNodes)
-            '   dbCols(intPCD).nTableID = CType(GetTableID(dbCols(intPCD).dbName), Country)
-            '   .ColSec = dbCols(intPCD)
-            '   CreateSTAADMemberProperty(.ColSec)
-            '   OSProperty.AssignBeamProperty(.grpColumnPCD, .ColSec.ID)
-            '   OSProperty.AssignMemberSpecToBeam(.grpColumnPCD, OffSpecEnd)
-            '   With .ColSec.mData
-            '      .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
-            '   End With
-            '   AssignMaterialPropertyToBeams(.grpColumnPCD, .ColSec.mData.STAADName)
-            'End If
+                OSProperty.AssignMemberSpecToBeam(.grpBeamPCD, OffSpecStart)
+                OSProperty.AssignMemberSpecToBeam(.grpBeamPCD, OffSpecEnd)
+                If intPCD < UBound(SSI) Then
+                    OSGeometry.CreateGroupEx(GroupType.Beams, "_COL_" & .Desc, UBound(.grpColumnPCD) + 1, .grpColumnPCD)
+                    OSGeometry.CreateGroupEx(GroupType.Nodes, "_SUP_" & .Desc, UBound(.SupNodes) + 1, .SupNodes)
+                    dbCols(intPCD).nTableID = CType(GetTableID(dbCols(intPCD).dbName), Country)
+                    .ColSec = dbCols(intPCD)
+                    CreateSTAADMemberProperty(.ColSec)
+                    OSProperty.AssignBeamProperty(.grpColumnPCD, .ColSec.ID)
+                    OSProperty.AssignMemberSpecToBeam(.grpColumnPCD, OffSpecEnd)
+                    With .ColSec.mData
+                        .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
+                    End With
+                    AssignMaterialPropertyToBeams(.grpColumnPCD, .ColSec.mData.STAADName)
+                End If
 
-            '' Generate Cross Bracings
-            'If .HasCB Then
-            '   Dim sNodeCB1 As NodeCoOrds, eNodeCB1 As NodeCoOrds, mNodeCB As NodeCoOrds
-            '   Dim sNodeCB2 As NodeCoOrds, eNodeCB2 As NodeCoOrds
-            '   Select Case .CBPattern
-            '      Case "Continuous"
-            '         CBStep = 1
-            '      Case "Alternate"
-            '         CBStep = 2
-            '      Case "Skip 2 Bays"
-            '         CBStep = 3
-            '      Case "Skip 3 Bays"
-            '         CBStep = 4
-            '      Case "Skip 4 Bays"
-            '         CBStep = 5
-            '   End Select
-            '   ReDim .CBIncPCD(0)
-            '   For I = 0 To CInt(GD.nRB - 1) Step CBStep
-            '      sNodeCB1 = .ColumnIncPCD(I).eNode
-            '      sNodeCB2 = .ColumnIncPCD(I).sNode
-            '      If I = GD.nRB - 1 Then
-            '         eNodeCB1 = .ColumnIncPCD(0).sNode
-            '         eNodeCB2 = .ColumnIncPCD(0).eNode
-            '      Else
-            '         eNodeCB1 = .ColumnIncPCD(I + 1).sNode
-            '         eNodeCB2 = .ColumnIncPCD(I + 1).eNode
-            '      End If
-            '      SeqNodeNum = SeqNodeNum + 1
-            '      With mNodeCB
-            '         .No = SeqNodeNum : .x = (sNodeCB1.x + eNodeCB1.x) / 2 : .y = (sNodeCB1.y + eNodeCB1.y) / 2 : .z = (sNodeCB1.z + eNodeCB1.z) / 2
-            '         OSGeometry.CreateNode(.No, .x, .y, .z)
-            '      End With
-            '      Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, sNodeCB1.No, mNodeCB.No, sRelMyMz, eRelMyMz)
-            '      Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, mNodeCB.No, eNodeCB1.No, sRelMyMz, eRelMyMz)
-            '      Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, sNodeCB2.No, mNodeCB.No, sRelMyMz)
-            '      Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, mNodeCB.No, eNodeCB2.No, , eRelMyMz)
-            '   Next I
-            '   ReDim Preserve .CBIncPCD(UBound(.CBIncPCD) - 1)
-            '   ReDim Preserve .grpCBPCD(UBound(.CBIncPCD))
-            '   For I = 0 To UBound(.CBIncPCD)
-            '      .grpCBPCD(I) = CInt(.CBIncPCD(I).No)
-            '   Next I
-            '   OSGeometry.CreateGroupEx(GroupType.Beams, "_CBRACE_" & .Desc, UBound(.grpCBPCD) + 1, .grpCBPCD)
-            '   dbCB(intPCD).nTableID = CType(GetTableID(dbCB(intPCD).dbName), Country)
-            '   .CBSec = dbCB(intPCD)
-            '   CreateSTAADMemberProperty(.CBSec)
-            '   OSProperty.AssignBeamProperty(.grpCBPCD, .CBSec.ID)
-            '   With .CBSec.mData
-            '      .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
-            '   End With
-            '   AssignMaterialPropertyToBeams(.grpCBPCD, .CBSec.mData.STAADName)
-            '   'AssignMaterialPropertyToBeams(.grpCBPCD, A53GrB.Grade)
-            'End If
-            '' End of Cross Bracings Generation
+                ' Generate Cross Bracings
+                If .HasCB Then
+                    Dim sNodeCB1 As NodeCoOrds, eNodeCB1 As NodeCoOrds, mNodeCB As NodeCoOrds
+                    Dim sNodeCB2 As NodeCoOrds, eNodeCB2 As NodeCoOrds
+                    Select Case .CBPattern
+                        Case "Continuous"
+                            CBStep = 1
+                        Case "Alternate"
+                            CBStep = 2
+                        Case "Skip 2 Bays"
+                            CBStep = 3
+                        Case "Skip 3 Bays"
+                            CBStep = 4
+                        Case "Skip 4 Bays"
+                            CBStep = 5
+                    End Select
+                    ReDim .CBIncPCD(0)
+                    For I = 0 To CInt(GD.nRB - 1) Step CBStep
+                        sNodeCB1 = .ColumnIncPCD(I).eNode
+                        sNodeCB2 = .ColumnIncPCD(I).sNode
+                        If I = GD.nRB - 1 Then
+                            eNodeCB1 = .ColumnIncPCD(0).sNode
+                            eNodeCB2 = .ColumnIncPCD(0).eNode
+                        Else
+                            eNodeCB1 = .ColumnIncPCD(I + 1).sNode
+                            eNodeCB2 = .ColumnIncPCD(I + 1).eNode
+                        End If
+                        SeqNodeNum = SeqNodeNum + 1
+                        With mNodeCB
+                            .No = SeqNodeNum : .x = (sNodeCB1.x + eNodeCB1.x) / 2 : .y = (sNodeCB1.y + eNodeCB1.y) / 2 : .z = (sNodeCB1.z + eNodeCB1.z) / 2
+                            OSGeometry.CreateNode(.No, .x, .y, .z)
+                        End With
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, sNodeCB1.No, mNodeCB.No, sRelMyMz, eRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, mNodeCB.No, eNodeCB1.No, sRelMyMz, eRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, sNodeCB2.No, mNodeCB.No, sRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).CBIncPCD, mNodeCB.No, eNodeCB2.No, , eRelMyMz)
+                    Next I
+                    ReDim Preserve .CBIncPCD(UBound(.CBIncPCD) - 1)
+                    ReDim Preserve .grpCBPCD(UBound(.CBIncPCD))
+                    For I = 0 To UBound(.CBIncPCD)
+                        .grpCBPCD(I) = CInt(.CBIncPCD(I).No)
+                    Next I
+                    OSGeometry.CreateGroupEx(GroupType.Beams, "_CBRACE_" & .Desc, UBound(.grpCBPCD) + 1, .grpCBPCD)
+                    dbCB(intPCD).nTableID = CType(GetTableID(dbCB(intPCD).dbName), Country)
+                    .CBSec = dbCB(intPCD)
+                    CreateSTAADMemberProperty(.CBSec)
+                    OSProperty.AssignBeamProperty(.grpCBPCD, .CBSec.ID)
+                    With .CBSec.mData
+                        .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
+                    End With
+                    AssignMaterialPropertyToBeams(.grpCBPCD, .CBSec.mData.STAADName)
+                    'AssignMaterialPropertyToBeams(.grpCBPCD, A53GrB.Grade)
+                End If
+                ' End of Cross Bracings Generation
          End With
       Next intPCD
-      '' Generate Radial Bracings
-      'For intPCD = 0 To UBound(SSI) - 1
-      '   With SSI(intPCD)
-      '      If .HasRB And (intPCD <> UBound(SSI) - 1) Then
-      '         Dim sNodeRB1 As NodeCoOrds, eNodeRB1 As NodeCoOrds, mNodeRB As NodeCoOrds
-      '         Dim sNodeRB2 As NodeCoOrds, eNodeRB2 As NodeCoOrds
-      '         Select Case .RBPattern
-      '            Case "Continuous"
-      '               RBStep = 1
-      '            Case "Alternate"
-      '               RBStep = 2
-      '            Case "Skip 2 Bays"
-      '               RBStep = 3
-      '            Case "Skip 3 Bays"
-      '               RBStep = 4
-      '            Case "Skip 4 Bays"
-      '               RBStep = 5
-      '         End Select
-      '         ReDim .RBIncPCD(0)
-      '         For I = 0 To CInt(GD.nRB - 1) Step RBStep
-      '            sNodeRB1 = .ColumnIncPCD(I).eNode
-      '            sNodeRB2 = .ColumnIncPCD(I).sNode
-      '            eNodeRB1 = SSI(intPCD + 1).ColumnIncPCD(I).sNode
-      '            eNodeRB2 = SSI(intPCD + 1).ColumnIncPCD(I).eNode
+        ' Generate Radial Bracings
+        For intPCD = 0 To UBound(SSI) - 1
+            With SSI(intPCD)
+                If .HasRB And (intPCD <> UBound(SSI) - 1) Then
+                    Dim sNodeRB1 As NodeCoOrds, eNodeRB1 As NodeCoOrds, mNodeRB As NodeCoOrds
+                    Dim sNodeRB2 As NodeCoOrds, eNodeRB2 As NodeCoOrds
+                    Select Case .RBPattern
+                        Case "Continuous"
+                            RBStep = 1
+                        Case "Alternate"
+                            RBStep = 2
+                        Case "Skip 2 Bays"
+                            RBStep = 3
+                        Case "Skip 3 Bays"
+                            RBStep = 4
+                        Case "Skip 4 Bays"
+                            RBStep = 5
+                    End Select
+                    ReDim .RBIncPCD(0)
+                    For I = 0 To CInt(GD.nRB - 1) Step RBStep
+                        sNodeRB1 = .ColumnIncPCD(I).eNode
+                        sNodeRB2 = .ColumnIncPCD(I).sNode
+                        eNodeRB1 = SSI(intPCD + 1).ColumnIncPCD(I).sNode
+                        eNodeRB2 = SSI(intPCD + 1).ColumnIncPCD(I).eNode
 
-      '            SeqNodeNum = SeqNodeNum + 1
-      '            GetIntersectionNode(sNodeRB1, eNodeRB1, sNodeRB2, eNodeRB2, mNodeRB)
-      '            With mNodeRB
-      '               .No = SeqNodeNum
-      '               OSGeometry.CreateNode(.No, .x, .y, .z)
-      '            End With
-      '            Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, sNodeRB1.No, mNodeRB.No, sRelMyMz, eRelMyMz)
-      '            Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, mNodeRB.No, eNodeRB1.No, sRelMyMz, eRelMyMz)
-      '            Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, sNodeRB2.No, mNodeRB.No, sRelMyMz)
-      '            Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, mNodeRB.No, eNodeRB2.No, , eRelMyMz)
-      '         Next I
-      '         ReDim Preserve .RBIncPCD(UBound(.RBIncPCD) - 1)
-      '         ReDim Preserve .grpRBPCD(UBound(.RBIncPCD))
-      '         For I = 0 To UBound(.RBIncPCD)
-      '            .grpRBPCD(I) = CInt(.RBIncPCD(I).No)
-      '         Next I
-      '         OSGeometry.CreateGroupEx(GroupType.Beams, "_RBRACE_" & .Desc, UBound(.grpRBPCD) + 1, .grpRBPCD)
-      '         dbRB(intPCD).nTableID = CType(GetTableID(dbRB(intPCD).dbName), Country)
-      '         .RBSec = dbRB(intPCD)
-      '         CreateSTAADMemberProperty(.RBSec)
-      '         OSProperty.AssignBeamProperty(.grpRBPCD, .RBSec.ID)
-      '         With .RBSec.mData
-      '            .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
-      '         End With
-      '         AssignMaterialPropertyToBeams(.grpRBPCD, .RBSec.mData.STAADName)
-      '         'AssignMaterialPropertyToBeams(.grpRBPCD, A53GrB.Grade)
-      '      End If
-      '   End With
-      'Next intPCD
-      '' End of Radial Bracings Generation
-      'If HasCompRing Then
-      '   Call TG.GenerateCompMesh(Nodes.CR, SSI(UBound(SSI)).NodesPCD, Groups.CR, SeqNodeNum, SeqPlateNum, Component.CompRing)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_TOP", UBound(Groups.CR) + 1, Groups.CR)
+                        SeqNodeNum = SeqNodeNum + 1
+                        GetIntersectionNode(sNodeRB1, eNodeRB1, sNodeRB2, eNodeRB2, mNodeRB)
+                        With mNodeRB
+                            .No = SeqNodeNum
+                            OSGeometry.CreateNode(.No, .x, .y, .z)
+                        End With
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, sNodeRB1.No, mNodeRB.No, sRelMyMz, eRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, mNodeRB.No, eNodeRB1.No, sRelMyMz, eRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, sNodeRB2.No, mNodeRB.No, sRelMyMz)
+                        Call CreateNewBeam(SeqPlateNum, SSI(intPCD).RBIncPCD, mNodeRB.No, eNodeRB2.No, , eRelMyMz)
+                    Next I
+                    ReDim Preserve .RBIncPCD(UBound(.RBIncPCD) - 1)
+                    ReDim Preserve .grpRBPCD(UBound(.RBIncPCD))
+                    For I = 0 To UBound(.RBIncPCD)
+                        .grpRBPCD(I) = CInt(.RBIncPCD(I).No)
+                    Next I
+                    OSGeometry.CreateGroupEx(GroupType.Beams, "_RBRACE_" & .Desc, UBound(.grpRBPCD) + 1, .grpRBPCD)
+                    dbRB(intPCD).nTableID = CType(GetTableID(dbRB(intPCD).dbName), Country)
+                    .RBSec = dbRB(intPCD)
+                    CreateSTAADMemberProperty(.RBSec)
+                    OSProperty.AssignBeamProperty(.grpRBPCD, .RBSec.ID)
+                    With .RBSec.mData
+                        .ID = CInt(OSProperty.CreateIsotropicMaterialProperties(.STAADName, .E, .Poisson, .G, .Density, .Alpha, .CrDamp))
+                    End With
+                    AssignMaterialPropertyToBeams(.grpRBPCD, .RBSec.mData.STAADName)
+                    'AssignMaterialPropertyToBeams(.grpRBPCD, A53GrB.Grade)
+                End If
+            End With
+        Next intPCD
+        ' End of Radial Bracings Generation
+        If HasCompRing Then
+            Call TG.GenerateCompMesh(Nodes.CR, SSI(UBound(SSI)).NodesPCD, Groups.CR, SeqNodeNum, SeqPlateNum, Component.CompRing)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_TOP", UBound(Groups.CR) + 1, Groups.CR)
 
-      '   Call TG.GenerateCompMesh(Nodes.UF, Nodes.CR, Groups.UF, SeqNodeNum, SeqPlateNum, Component.UFCone)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_UFCONE", UBound(Groups.UF) + 1, Groups.UF)
+            Call TG.GenerateCompMesh(Nodes.UF, Nodes.CR, Groups.UF, SeqNodeNum, SeqPlateNum, Component.UFCone)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_UFCONE", UBound(Groups.UF) + 1, Groups.UF)
 
-      '   If HasCRVertAnnulus Then
-      '      Call TG.GenerateCompMesh(Nodes.CRVertAnnulus, SSI(UBound(SSI)).NodesPCD, Groups.CRVertAnnulus, SeqNodeNum, SeqPlateNum, Component.CRVertAnnulus)
-      '      OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_VRING", UBound(Groups.CRVertAnnulus) + 1, Groups.CRVertAnnulus)
-      '      If HasCRStiffener Then
-      '         Call TG.GenerateVAStiffenerMesh(Nodes.CRVAS, Nodes.CR, Nodes.CRVertAnnulus, Nodes.UF, Groups.CRVAS, SeqNodeNum, SeqPlateNum)
-      '         OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_VAS", UBound(Groups.CRVAS) + 1, Groups.CRVAS)
-      '      End If
-      '   End If
-      'Else
-      '   Call TG.GenerateCompMesh(Nodes.UF, SSI(UBound(SSI)).NodesPCD, Groups.UF, SeqNodeNum, SeqPlateNum, Component.UFCone)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_UFCONE", UBound(Groups.UF) + 1, Groups.UF)
-      'End If
+            If HasCRVertAnnulus Then
+                Call TG.GenerateCompMesh(Nodes.CRVertAnnulus, SSI(UBound(SSI)).NodesPCD, Groups.CRVertAnnulus, SeqNodeNum, SeqPlateNum, Component.CRVertAnnulus)
+                OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_VRING", UBound(Groups.CRVertAnnulus) + 1, Groups.CRVertAnnulus)
+                If HasCRStiffener Then
+                    Call TG.GenerateVAStiffenerMesh(Nodes.CRVAS, Nodes.CR, Nodes.CRVertAnnulus, Nodes.UF, Groups.CRVAS, SeqNodeNum, SeqPlateNum)
+                    OSGeometry.CreateGroupEx(GroupType.Plates, "_CR_VAS", UBound(Groups.CRVAS) + 1, Groups.CRVAS)
+                End If
+            End If
+        Else
+            Call TG.GenerateCompMesh(Nodes.UF, SSI(UBound(SSI)).NodesPCD, Groups.UF, SeqNodeNum, SeqPlateNum, Component.UFCone)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_UFCONE", UBound(Groups.UF) + 1, Groups.UF)
+        End If
 
-      '' Check and Generate the Optional Components
-      'If HasCCBottom Then
-      '   Call TG.GenerateCompMesh(Nodes.CCBot, Nodes.UF, Groups.CCBot, SeqNodeNum, SeqPlateNum, Component.CCBot)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CC_BOT", UBound(Groups.CCBot) + 1, Groups.CCBot)
-      'End If
-      'If HasCCTop Then
-      '   Call TG.GenerateCompMesh(Nodes.CCTop, Nodes.UF, Groups.CCTop, SeqNodeNum, SeqPlateNum, Component.CCTop)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CC_TOP", UBound(Groups.CCTop) + 1, Groups.CCTop)
-      'End If
-      'If HasCCBottomBasePlate Then
-      '   Call TG.GenerateCompMesh(Nodes.BPOuter, Nodes.CCBot, Groups.BPOuter, SeqNodeNum, SeqPlateNum, Component.BPOuter, GD.pcdBolts, GD.dCC)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_OUTER", UBound(Groups.BPOuter) + 1, Groups.BPOuter)
+        ' Check and Generate the Optional Components
+        If HasCCBottom Then
+            Call TG.GenerateCompMesh(Nodes.CCBot, Nodes.UF, Groups.CCBot, SeqNodeNum, SeqPlateNum, Component.CCBot)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CC_BOT", UBound(Groups.CCBot) + 1, Groups.CCBot)
+        End If
+        If HasCCTop Then
+            Call TG.GenerateCompMesh(Nodes.CCTop, Nodes.UF, Groups.CCTop, SeqNodeNum, SeqPlateNum, Component.CCTop)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CC_TOP", UBound(Groups.CCTop) + 1, Groups.CCTop)
+        End If
+        If HasCCBottomBasePlate Then
+            Call TG.GenerateCompMesh(Nodes.BPOuter, Nodes.CCBot, Groups.BPOuter, SeqNodeNum, SeqPlateNum, Component.BPOuter, GD.pcdBolts, GD.dCC)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_OUTER", UBound(Groups.BPOuter) + 1, Groups.BPOuter)
 
-      '   Call TG.GenerateCompMesh(Nodes.BPBolts, Nodes.BPOuter, Groups.BPBolts, SeqNodeNum, SeqPlateNum, Component.BPBolts, GD.odBP, GD.pcdBolts)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_BOLTS", UBound(Groups.BPBolts) + 1, Groups.BPBolts)
+            Call TG.GenerateCompMesh(Nodes.BPBolts, Nodes.BPOuter, Groups.BPBolts, SeqNodeNum, SeqPlateNum, Component.BPBolts, GD.odBP, GD.pcdBolts)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_BOLTS", UBound(Groups.BPBolts) + 1, Groups.BPBolts)
 
-      '   ' This block generates the supports for centre column base plate
-      '   Dim CCSupport As SupportCondition, CCSupportNum As Integer, iBolt As Integer, BoltStep As Integer, grpCCSupNodes() As Long
-      '   With CCSupport
-      '      ReDim .Rel(0 To 5) : ReDim .Spr(0 To 5)
-      '      .Rel(0) = Math.Abs(CDbl(Not chkTxCC.Checked)) : .Rel(1) = Math.Abs(CDbl(Not chkTyCC.Checked)) : .Rel(2) = Math.Abs(CDbl(Not chkTzCC.Checked))
-      '      .Rel(3) = Math.Abs(CDbl(Not chkRxCC.Checked)) : .Rel(4) = Math.Abs(CDbl(Not chkRyCC.Checked)) : .Rel(5) = Math.Abs(CDbl(Not chkRzCC.Checked))
-      '      .Spr(0) = 0.0# : .Spr(1) = 0.0# : .Spr(2) = 0.0# : .Spr(3) = 0.0# : .Spr(4) = 0.0# : .Spr(5) = 0.0#
-      '      CCSupportNum = CInt(OSSupport.CreateSupportFixedBut(.Rel, .Spr))
-      '   End With
-      '   If (UBound(Nodes.BPBolts(0).Nodes) Mod CInt(Val(Me.txtnBoltsCC.Text)) = 0) Then
-      '      BoltStep = CInt(UBound(Nodes.BPBolts(0).Nodes) / CInt(Val(Me.txtnBoltsCC.Text)))
-      '      ReDim grpCCSupNodes(0)
-      '      For iBolt = 0 To UBound(Nodes.BPBolts(0).Nodes) - 1 Step BoltStep
-      '         grpCCSupNodes(UBound(grpCCSupNodes)) = Nodes.BPBolts(0).Nodes(iBolt).No
-      '         OSSupport.AssignSupportToNode(Nodes.BPBolts(0).Nodes(iBolt).No, CCSupportNum)
-      '         ReDim Preserve grpCCSupNodes(UBound(grpCCSupNodes) + 1)
-      '      Next iBolt
-      '      ReDim Preserve grpCCSupNodes(UBound(grpCCSupNodes) - 1)
-      '      OSGeometry.CreateGroupEx(GroupType.Nodes, "_SUP_CC", UBound(grpCCSupNodes) + 1, grpCCSupNodes)
-      '   Else
-      '      MsgBox("Error: CC supports cannot be generated. Number of CC bolts is NOT divisible with number of available nodes. " & vbCrLf & _
-      '              "Total number of nodes available are : " & UBound(Nodes.BPBolts(0).Nodes) & ". Please revise the number of bolts in the input.", vbOKOnly, "Cannot generate the CC supports")
-      '   End If
-      '   ' End of centre column supports generation
-      '   Call TG.GenerateCompMesh(Nodes.BPInner, Nodes.CCBot, Groups.BPInner, SeqNodeNum, SeqPlateNum, Component.BPInner, GD.dCC, GD.idBP)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_INNER", UBound(Groups.BPInner) + 1, Groups.BPInner)
-      'End If
-      'If HasCCBottomCapPlate Then
-      '   Call TG.GenerateCompMesh(Nodes.CPInnerBottom, Nodes.UF, Groups.CPInnerBottom, SeqNodeNum, SeqPlateNum, Component.CPInner, GD.dCC, GD.idCP)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_INNER", UBound(Groups.CPInnerBottom) + 1, Groups.CPInnerBottom)
-      'End If
-      'If HasCCTopCapPlate Then
-      '   Call TG.GenerateCompMesh(Nodes.CPOuter, Nodes.CCTop, Groups.CPOuter, SeqNodeNum, SeqPlateNum, Component.CPOuter, GD.odCP, GD.dCC)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_OUTER", UBound(Groups.CPOuter) + 1, Groups.CPOuter)
+            ' This block generates the supports for centre column base plate
+            Dim CCSupport As SupportCondition, CCSupportNum As Integer, iBolt As Integer, BoltStep As Integer, grpCCSupNodes() As Long
+            With CCSupport
+                ReDim .Rel(0 To 5) : ReDim .Spr(0 To 5)
+                .Rel(0) = Math.Abs(CDbl(Not chkTxCC.Checked)) : .Rel(1) = Math.Abs(CDbl(Not chkTyCC.Checked)) : .Rel(2) = Math.Abs(CDbl(Not chkTzCC.Checked))
+                .Rel(3) = Math.Abs(CDbl(Not chkRxCC.Checked)) : .Rel(4) = Math.Abs(CDbl(Not chkRyCC.Checked)) : .Rel(5) = Math.Abs(CDbl(Not chkRzCC.Checked))
+                .Spr(0) = 0.0# : .Spr(1) = 0.0# : .Spr(2) = 0.0# : .Spr(3) = 0.0# : .Spr(4) = 0.0# : .Spr(5) = 0.0#
+                CCSupportNum = CInt(OSSupport.CreateSupportFixedBut(.Rel, .Spr))
+            End With
+            If (UBound(Nodes.BPBolts(0).Nodes) Mod CInt(Val(Me.txtnBoltsCC.Text)) = 0) Then
+                BoltStep = CInt(UBound(Nodes.BPBolts(0).Nodes) / CInt(Val(Me.txtnBoltsCC.Text)))
+                ReDim grpCCSupNodes(0)
+                For iBolt = 0 To UBound(Nodes.BPBolts(0).Nodes) - 1 Step BoltStep
+                    grpCCSupNodes(UBound(grpCCSupNodes)) = Nodes.BPBolts(0).Nodes(iBolt).No
+                    OSSupport.AssignSupportToNode(Nodes.BPBolts(0).Nodes(iBolt).No, CCSupportNum)
+                    ReDim Preserve grpCCSupNodes(UBound(grpCCSupNodes) + 1)
+                Next iBolt
+                ReDim Preserve grpCCSupNodes(UBound(grpCCSupNodes) - 1)
+                OSGeometry.CreateGroupEx(GroupType.Nodes, "_SUP_CC", UBound(grpCCSupNodes) + 1, grpCCSupNodes)
+            Else
+                MsgBox("Error: CC supports cannot be generated. Number of CC bolts is NOT divisible with number of available nodes. " & vbCrLf & _
+                        "Total number of nodes available are : " & UBound(Nodes.BPBolts(0).Nodes) & ". Please revise the number of bolts in the input.", vbOKOnly, "Cannot generate the CC supports")
+            End If
+            ' End of centre column supports generation
+            Call TG.GenerateCompMesh(Nodes.BPInner, Nodes.CCBot, Groups.BPInner, SeqNodeNum, SeqPlateNum, Component.BPInner, GD.dCC, GD.idBP)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_BP_INNER", UBound(Groups.BPInner) + 1, Groups.BPInner)
+        End If
+        If HasCCBottomCapPlate Then
+            Call TG.GenerateCompMesh(Nodes.CPInnerBottom, Nodes.UF, Groups.CPInnerBottom, SeqNodeNum, SeqPlateNum, Component.CPInner, GD.dCC, GD.idCP)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_INNER", UBound(Groups.CPInnerBottom) + 1, Groups.CPInnerBottom)
+        End If
+        If HasCCTopCapPlate Then
+            Call TG.GenerateCompMesh(Nodes.CPOuter, Nodes.CCTop, Groups.CPOuter, SeqNodeNum, SeqPlateNum, Component.CPOuter, GD.odCP, GD.dCC)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_OUTER", UBound(Groups.CPOuter) + 1, Groups.CPOuter)
 
-      '   Call TG.GenerateCompMesh(Nodes.CPInner, Nodes.CCTop, Groups.CPInner, SeqNodeNum, SeqPlateNum, Component.CPInner, GD.dCC, GD.idCP)
-      '   OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_INNER", UBound(Groups.CPInner) + 1, Groups.CPInner)
-      'End If
+            Call TG.GenerateCompMesh(Nodes.CPInner, Nodes.CCTop, Groups.CPInner, SeqNodeNum, SeqPlateNum, Component.CPInner, GD.dCC, GD.idCP)
+            OSGeometry.CreateGroupEx(GroupType.Plates, "_CP_INNER", UBound(Groups.CPInner) + 1, Groups.CPInner)
+        End If
 
       ' Terminate the instantiated OpenSTAAD objects
       TG = Nothing
