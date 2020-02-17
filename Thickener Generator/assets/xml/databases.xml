@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <databases>
-<copyright>©Elevated Terrains Consulting Engineers</copyright>
 	<!-- The final tree view should be by combining all shapes in to one group -->
 	<!-- For example, the Indian database should show I shapes, C shapes etc., -->
 	<database name="Indian">
@@ -140,19 +139,19 @@
 			<section-type name="I Sections" db-table-name = "RU-I"/>
 			<section-type name="C Sections" db-table-name = "RU-C"/>
 			<section-type name="M Sections" db-table-name = "RU-M"/>
-			<section-type name="Б Sections" db-table-name = "RU-Б"/>
-			<section-type name="Ш Sections" db-table-name = "RU-Ш"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>
 			<section-type name="K Sections" db-table-name = "RU-K"/>
-			<section-type name="ДБ Sections" db-table-name = "RU-ДБ"/>
-			<section-type name="ДШ Sections" db-table-name = "RU-ДШ"/>
+			<section-type name="?? Sections" db-table-name = "RU-??"/>
+			<section-type name="?? Sections" db-table-name = "RU-??"/>
 		</shape>
 		<!-- Databases and table names of Channel sections -->        
 		<shape name="C">
-			<section-type name="У Sections" db-table-name = "RU-У"/>
-			<section-type name="П Sections" db-table-name = "RU-П"/>
-			<section-type name="Э Sections" db-table-name = "RU-Э"/>
-			<section-type name="С Sections" db-table-name = "RU-С"/>
-			<section-type name="Л Sections" db-table-name = "RU-Л"/>                        
+			<section-type name="? Sections" db-table-name = "RU-?"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>
+			<section-type name="? Sections" db-table-name = "RU-?"/>                        
 		</shape>
 	</database>
 </databases>
