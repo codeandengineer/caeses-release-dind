@@ -9,13 +9,21 @@
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
         Private Sub MyApplication_Startup(sender As Object, e As ApplicationServices.StartupEventArgs) Handles Me.Startup
+
+            Dim appStarter As ApplicationStarter = New ApplicationStarter
+            'appStarter.StartNormal(sender, e)
+            appStarter.StartByPassed()
+
+        End Sub
+
+    End Class
+    Class ApplicationStarter
+        Public Sub StartNormal(sender As Object, e As ApplicationServices.StartupEventArgs)
             Dim Lic As sesLicenseClass = New sesLicenseClass
             Dim LicStatus As String = ""
             LicStatus = Lic.GetLicenseStatus()
             If (LicStatus = "Valid") Then
-                Dim ObjSplash As Splash
-                ObjSplash = New Splash
-                ObjSplash.ShowDialog()
+                StartApplication()
             Else
                 Dim ObjLicStat As noLicense = New noLicense
                 With ObjLicStat
@@ -25,8 +33,18 @@
                 e.Cancel = True
             End If
         End Sub
-    End Class
 
+        Public Sub StartByPassed()
+            StartApplication()
+        End Sub
+
+        Private Sub StartApplication()
+            Dim ObjSplash As Splash
+            ObjSplash = New Splash
+            ObjSplash.ShowDialog()
+        End Sub
+
+    End Class
 
 End Namespace
 

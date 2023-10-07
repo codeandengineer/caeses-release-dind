@@ -843,7 +843,7 @@ GetFileName:
 
       Dim AdjHeight As Double
 
-      Call TG.CalcAdjHeight(WMesh, AdjHeight)
+      Call TG.CalculateHeightAdjustment(WMesh, AdjHeight)
 
       With WMesh
          .Hs = GD.hWall - GD.FreeBoard - GD.hLaun - AdjHeight
@@ -853,7 +853,7 @@ GetFileName:
 
       Call TG.GenerateMesh(WMesh, LFMesh, Groups.W, Nodes.W, Nodes.LF, "Wall", SeqNodeNum, SeqPlateNum, Component.Wall)
       If GD.hDroop <> 0.0# Then
-         Call TG.GenerateIFMesh(AdjHeight, Groups.Intface, Nodes.Intface, Nodes.W, "Droop", SeqNodeNum, SeqPlateNum, Component.WInterface)
+         Call TG.GenerateInterfaceMesh(AdjHeight, Groups.Intface, Nodes.Intface, Nodes.W, "Droop", SeqNodeNum, SeqPlateNum, Component.WInterface)
       End If
 
       Dim SSI() As SupportStructureInfo, nPCDs As Integer, intPCD As Integer
